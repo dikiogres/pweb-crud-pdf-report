@@ -15,7 +15,38 @@
             <div class="card-body p-5">
                 <h1 class="mb-4 text-center fw-bold">Pendaftaran Siswa Baru</h1>
 
+                <?php if (isset($_GET["status"])) : ?>
+                    <div class='alert <?= $_GET["status"] == "success" ? "alert-success" : "alert-danger" ?> alert-dismissible fade show' role='alert'>"
+                        <strong>
+                            <?php
+                            $alertTitle = "Unknown";
 
+                            if ($_GET["status"] == "success")
+                                $alertTitle = "Sukses!";
+                            else if ($_GET["status"] == "failed")
+                                $alertTitle = "Gagal!";
+                            else if ($_GET["status"] == "error_image_save")
+                                $alertTitle = "Penyimpanan gambar gagal.";
+
+                            echo $alertTitle;
+                            ?>
+                        </strong>
+                        <?php
+                        $alertMessage = "Unknown";
+
+                        if ($_GET["status"] == "success")
+                            $alertMessage = "Siswa berhasil didaftarkan.";
+                        else if ($_GET["status"] == "failed")
+                            $alertMessage = "Siswa gagal didaftarkan.";
+                        else if ($_GET["status"] == "error_image_save")
+                            $alertMessage = "Terjadi kesalahan saat menyimpan data foto.";
+
+                        echo $alertMessage;
+                        ?>
+                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>
+                <?php endif ?>
+                
                 <div class="d-flex gap-4 justify-content-center">
                     <a href="./registration-form.php" class="btn btn-info text-white fw-semibold">Daftar Baru</a>
                     <a href="./student-list.php" class="btn btn-outline-info fw-semibold">Lihat Pendaftar</a>
